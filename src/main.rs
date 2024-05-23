@@ -5,18 +5,45 @@ use std::cmp::Ordering;
 
 fn main(){
     println!("the guessing game is on baby!");
-    println!("drop your guess >>");
 
-    let secret_number = rand::thread_rng().gen_range(1..=100);
+    loop {
+        println!("drop your guess >>");
 
-    let mut guess = String::new();
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("failed to read");
+        let secret_number: u32 = rand::thread_rng().gen_range(1..=100);
 
-    
-    println!("the random secret number was {secret_number}");
+        let mut input = String::new();
+
+        io::stdin()
+            .read_line(&mut input)
+            .expect("failed to read");
+
+        if input.trim() == "quit" {
+                println!("you have decided to chicken out huh!\nits alright though come back another time!");
+                break;
+            }
+
+        let guess: u32 =  match input.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("your input was invalid lets try again!!");
+                continue;
+            },
+        };
+            
+        
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!\n"),
+            Ordering::Greater => println!("Too big!\n"),
+            Ordering::Equal => {
+                println!("\nYou win!\n\n");
+                break;
+            },
+        }
+
+        println!("the random secret number was {secret_number}\n");
 
 
-    println!("you guessed {guess}");
+        println!("you guessed {guess}\n");
+    }
 }
