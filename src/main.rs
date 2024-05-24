@@ -2,10 +2,9 @@ use std::io; // prelude is the set of functions and accesbilities that are emmpl
 use rand::Rng;             // for the functions or commands that are not present in the prelude we use "use" (pun intended)
 use std::cmp::Ordering;
 
-
+// TODO: implement the maximum tries system of 5 tries and comp and usr scores
 fn main(){
-    println!("the guessing game is on baby!");
-
+    println!("the guessing game is on baby!\nyou will get a maximum of 5 tries\nmax points 5");
     loop {
         println!("drop your guess >>");
 
